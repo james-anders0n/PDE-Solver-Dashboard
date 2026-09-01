@@ -1,0 +1,32 @@
+{
+  "sourceName": "U.S. Bureau of Labor Statistics official CPI release schedule",
+  "sourceUrl": "https://www.bls.gov/schedule/news_release/cpi.htm",
+  "sourceRevision": "verified-2026-08-24",
+  "fetchedAt": "2026-08-24T00:00:00Z",
+  "releases": [
+    {
+      "releaseId": "bls-cpi-2026-09-11",
+      "seriesId": "CPIAUCSL",
+      "referenceMonth": "2026-08",
+      "releaseTimestamp": "2026-09-11T12:30:00Z"
+    },
+    {
+      "releaseId": "bls-cpi-2026-10-14",
+      "seriesId": "CPIAUCSL",
+      "referenceMonth": "2026-09",
+      "releaseTimestamp": "2026-10-14T12:30:00Z"
+    },
+    {
+      "releaseId": "bls-cpi-2026-11-10",
+      "seriesId": "CPIAUCSL",
+      "referenceMonth": "2026-10",
+      "releaseTimestamp": "2026-11-10T13:30:00Z"
+    },
+    {
+      "releaseId": "bls-cpi-2026-12-10",
+      "seriesId": "CPIAUCSL",
+      "referenceMonth": "2026-11",
+      "releaseTimestamp": "2026-12-10T13:30:00Z"
+    }
+  ]
+}

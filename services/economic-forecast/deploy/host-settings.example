@@ -1,0 +1,19 @@
+# Non-secret deployment settings only. Secret values belong in the host's secret store.
+ECONOMIC_FORECAST_IMAGE=registry.example.invalid/pde/economic-forecast@sha256:replace-with-built-image-digest
+ECONOMIC_FORECAST_DASHBOARD_URL=https://pde-studio-quant-lab.jamesdarrylkurtander.chatgpt.site
+ECONOMIC_FORECAST_HOST_PORT=8020
+ECONOMIC_FORECAST_LOG_LEVEL=info
+ECONOMIC_FORECAST_MAX_WORKERS=1
+ECONOMIC_FORECAST_MAX_QUEUED_JOBS=2
+ECONOMIC_FORECAST_HTTP_CONCURRENCY=32
+ECONOMIC_FORECAST_MAX_REQUEST_BYTES=65536
+ECONOMIC_FORECAST_REQUEST_TIMEOUT_SECONDS=15
+ECONOMIC_FORECAST_OUTBOUND_TIMEOUT_SECONDS=20
+ECONOMIC_FORECAST_GRACEFUL_SHUTDOWN_SECONDS=300
+ECONOMIC_FORECAST_STOP_GRACE_PERIOD=5m
+
+# These are paths supplied by the host, not credential values.
+FRED_API_KEY_SECRET_FILE=/host/secrets/fred_api_key
+ECONOMIC_FORECAST_SERVICE_TOKEN_SECRET_FILE=/host/secrets/service_token
+ECONOMIC_FORECAST_INGEST_TOKEN_SECRET_FILE=/host/secrets/dashboard_ingest_token
+ECONOMIC_FORECAST_CONFIG_SECRET_FILE=/host/secrets/forecast_config.json

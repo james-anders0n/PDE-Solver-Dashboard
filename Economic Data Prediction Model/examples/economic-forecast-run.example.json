@@ -1,0 +1,52 @@
+{
+  "inputCsv": "../data/point_in_time_observations.csv",
+  "outputDirectory": "../snapshots",
+  "runAsOf": "2026-08-10T00:00:00Z",
+  "target": {
+    "seriesId": "CPIAUCSL",
+    "label": "US CPI month-on-month",
+    "unit": "decimal-change",
+    "targetDate": "2026-07-01",
+    "availabilityDate": "2026-08-12",
+    "horizonMonths": 1
+  },
+  "features": {
+    "momPeriods": [1],
+    "yoyPeriods": [12],
+    "rollingZWindows": [12, 24],
+    "targetLagPeriods": [1],
+    "pmiSeriesIds": [],
+    "yieldCurveLongSeriesId": null,
+    "yieldCurveShortSeriesId": null,
+    "fedFundsSeriesId": null,
+    "inflationLevelSeriesId": "CPIAUCSL",
+    "inflationRateScale": 100.0,
+    "cutoffInclusive": false
+  },
+  "model": {
+    "selectedModel": "auto",
+    "minTrainSize": 120,
+    "testSize": 12,
+    "stepSize": 12,
+    "allowPartialTestWindow": true,
+    "imputationStrategy": "median",
+    "ridgeAlpha": 1.0,
+    "lightgbmParams": {
+      "n_estimators": 150,
+      "learning_rate": 0.03,
+      "min_child_samples": 12,
+      "n_jobs": 1,
+      "verbosity": -1,
+      "random_state": 7
+    }
+  },
+  "distribution": {
+    "drawCount": 10000,
+    "seed": 1729,
+    "histogramBins": 40,
+    "minimumResiduals": 36,
+    "thresholds": [0.0, 0.003],
+    "methodVersion": "1.0.0"
+  },
+  "requireBeatsNaive": true
+}

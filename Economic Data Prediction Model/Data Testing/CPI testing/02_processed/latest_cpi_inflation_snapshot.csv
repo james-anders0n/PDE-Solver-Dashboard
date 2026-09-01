@@ -1,0 +1,3 @@
+date,series_id,series_label,index_value,mom_inflation_pct,annualized_mom_inflation_pct,yoy_inflation_pct
+1/05/2026,CPIAUCSL,headline_cpi,333.979,0.472914229,5.824930142,4.270032657
+1/05/2026,CPILFESL,core_cpi,336.121,0.20809545,2.525925028,2.957113583

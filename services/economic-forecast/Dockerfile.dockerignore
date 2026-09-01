@@ -1,0 +1,5 @@
+*
+!services/economic-forecast/**
+!Economic Data Prediction Model/pyproject.toml
+!Economic Data Prediction Model/README.md
+!Economic Data Prediction Model/src/**

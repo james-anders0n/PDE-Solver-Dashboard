@@ -1,0 +1,43 @@
+{
+  "name": "pde-solver-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "dev": "vinext dev",
+    "build": "vinext build",
+    "start": "vinext start",
+    "test": "npm run build && npm run test:engine && node --test tests/rendered-html.test.mjs",
+    "test:engine": "node --experimental-strip-types --test tests/numerical-acceptance.test.ts tests/option-valuation-assessment.test.ts tests/pde-engine.test.ts tests/economic-bridge.test.ts tests/economic-forecast.test.ts tests/economic-forecast-api.test.ts tests/economic-forecast-operations.test.ts tests/cpi-scenario.test.ts tests/case-definition.test.ts tests/case-state.test.ts tests/model-state-integrity.test.ts tests/merton-policy-presentation.test.ts tests/condition-model-rendering.test.ts tests/condition-flow.test.ts tests/workflow-status-rendering.test.ts tests/workbench-shell.test.ts tests/condition-workbench.test.ts tests/solve-execution-surface.test.ts tests/decide-workspace.test.ts tests/completed-result-history.test.ts tests/end-to-end-case-workflow.test.ts tests/responsive-evidence-ux.test.ts tests/parameter-uncertainty.test.ts tests/math-rendering.test.ts tests/control-help.test.ts tests/market-data.test.ts tests/monte-carlo.test.ts tests/monte-carlo-gbm.test.ts tests/monte-carlo-heston.test.ts tests/monte-carlo-short-rate.test.ts tests/monte-carlo-merton.test.ts tests/monte-carlo-ui.test.ts tests/solver-jobs-monte-carlo.test.ts",
+    "lint": "eslint app worker db tests drizzle.config.ts next.config.ts vite.config.ts eslint.config.mjs",
+    "db:generate": "drizzle-kit generate"
+  },
+  "dependencies": {
+    "drizzle-orm": "0.45.2",
+    "katex": "^0.16.22",
+    "next": "16.2.6",
+    "react": "19.2.6",
+    "react-dom": "19.2.6"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "1.37.1",
+    "@tailwindcss/postcss": "4.2.1",
+    "@types/node": "22.19.19",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.2",
+    "@vitejs/plugin-rsc": "0.5.26",
+    "drizzle-kit": "0.31.10",
+    "eslint": "9.39.4",
+    "eslint-config-next": "16.2.6",
+    "react-server-dom-webpack": "19.2.6",
+    "tailwindcss": "4.2.1",
+    "typescript": "5.9.3",
+    "vinext": "0.0.50",
+    "vite": "8.0.13",
+    "wrangler": "4.92.0"
+  },
+  "type": "module"
+}

@@ -1,0 +1,61 @@
+name: pde-economic-forecast
+
+services:
+  sidecar:
+    image: ${ECONOMIC_FORECAST_IMAGE:?Set an immutable image digest or release tag}
+    restart: unless-stopped
+    init: true
+    read_only: true
+    user: "10001:10001"
+    ports:
+      - "127.0.0.1:${ECONOMIC_FORECAST_HOST_PORT:-8020}:8020"
+    environment:
+      PORT: "8020"
+      LOG_LEVEL: ${ECONOMIC_FORECAST_LOG_LEVEL:-info}
+      ECONOMIC_FORECAST_DASHBOARD_URL: ${ECONOMIC_FORECAST_DASHBOARD_URL:?Set the HTTPS dashboard origin}
+      ECONOMIC_FORECAST_SNAPSHOT_DIR: /var/lib/economic-forecast/snapshots
+      ECONOMIC_FORECAST_CONFIG_PATH: /run/secrets/forecast_config
+      FRED_API_KEY_FILE: /run/secrets/fred_api_key
+      ECONOMIC_FORECAST_SERVICE_TOKEN_FILE: /run/secrets/service_token
+      ECONOMIC_FORECAST_INGEST_TOKEN_FILE: /run/secrets/dashboard_ingest_token
+      ECONOMIC_FORECAST_MAX_WORKERS: ${ECONOMIC_FORECAST_MAX_WORKERS:-1}
+      ECONOMIC_FORECAST_MAX_QUEUED_JOBS: ${ECONOMIC_FORECAST_MAX_QUEUED_JOBS:-2}
+      ECONOMIC_FORECAST_HTTP_CONCURRENCY: ${ECONOMIC_FORECAST_HTTP_CONCURRENCY:-32}
+      ECONOMIC_FORECAST_MAX_REQUEST_BYTES: ${ECONOMIC_FORECAST_MAX_REQUEST_BYTES:-65536}
+      ECONOMIC_FORECAST_REQUEST_TIMEOUT_SECONDS: ${ECONOMIC_FORECAST_REQUEST_TIMEOUT_SECONDS:-15}
+      ECONOMIC_FORECAST_OUTBOUND_TIMEOUT_SECONDS: ${ECONOMIC_FORECAST_OUTBOUND_TIMEOUT_SECONDS:-20}
+      ECONOMIC_FORECAST_GRACEFUL_SHUTDOWN_SECONDS: ${ECONOMIC_FORECAST_GRACEFUL_SHUTDOWN_SECONDS:-300}
+    secrets:
+      - fred_api_key
+      - service_token
+      - dashboard_ingest_token
+      - forecast_config
+    volumes:
+      - forecast_state:/var/lib/economic-forecast
+    tmpfs:
+      - /tmp:size=128m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8020/ready', timeout=4).read()"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    stop_grace_period: ${ECONOMIC_FORECAST_STOP_GRACE_PERIOD:-5m}
+
+volumes:
+  forecast_state:
+    name: pde-economic-forecast-state
+
+secrets:
+  fred_api_key:
+    file: ${FRED_API_KEY_SECRET_FILE:?Set the host secret file path}
+  service_token:
+    file: ${ECONOMIC_FORECAST_SERVICE_TOKEN_SECRET_FILE:?Set the host secret file path}
+  dashboard_ingest_token:
+    file: ${ECONOMIC_FORECAST_INGEST_TOKEN_SECRET_FILE:?Set the host secret file path}
+  forecast_config:
+    file: ${ECONOMIC_FORECAST_CONFIG_SECRET_FILE:?Set the host orchestration config secret file path}
